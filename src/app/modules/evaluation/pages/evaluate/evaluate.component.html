@@ -1,0 +1,32 @@
+<form [formGroup]="evaluationForm" class="container" (ngSubmit)="evaluar()">
+  <h2>Evaluate Client</h2>
+  <div class="form-evaluation row">
+    <div class="form-group col-12">
+        <label class="form-evaluation__input-label" for="clientName">Client Name :</label>
+        <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && getEvaluationForm.clientName.errors }" id="clientName" formControlName="clientName" placeholder="Input Client Name"/>
+        <div *ngIf="submitted && getEvaluationForm.clientName.errors" class="invalid-feedback">
+            <div *ngIf="getEvaluationForm.clientName.errors.required">Client Name is required</div>
+        </div>
+    </div>
+    <div class="form-group col-12">
+        <label class="form-evaluation__input-label" for="creditLimit">Credit Limit ($) : </label>
+        <input type="number" class="form-control" [ngClass]="{ 'is-invalid': submitted && getEvaluationForm.creditLimit.errors }" formControlName="creditLimit" placeholder="Input Credit Limit"/>
+        <div *ngIf="submitted && getEvaluationForm.creditLimit.errors" class="invalid-feedback">
+            <div *ngIf="getEvaluationForm.creditLimit.errors.required">Credit Limit is required</div>
+            <div *ngIf="getEvaluationForm.creditLimit.errors.pattern">The value provided does not meet the required format, please indicate the values ​​without decimal or up to 2 decimals.</div>
+        </div>
+    </div>
+    <div class="form-group col-12">
+        <label class="form-evaluation__input-label" for="typeOfEvaluation">Type Of Evaluation : </label>
+        <select class="form-control" [ngClass]="{ 'is-invalid': submitted && getEvaluationForm.typeOfEvaluation.errors }" formControlName="typeOfEvaluation">
+          <option value="TYPE_A">A</option>
+          <option value="TYPE_B">B</option>
+          <option value="TYPE_C">C</option>
+        </select>
+        <div *ngIf="submitted && getEvaluationForm.typeOfEvaluation.errors" class="invalid-feedback">
+            <div *ngIf="getEvaluationForm.typeOfEvaluation.errors.required">Credit Limit is required</div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg btn-block">Calculate</button>
+    <button type="button" class="btn btn-secondary btn-lg btn-block" (click)="clear()">Clear</button>
+</div>
